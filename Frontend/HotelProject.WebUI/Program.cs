@@ -1,5 +1,10 @@
+using HotelProject.DataAccessLayer.Concrete;
+using HotelProject.EntityLayer.Concrete;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<Context>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
 // Add services to the container.
 builder.Services.AddHttpClient();
 
