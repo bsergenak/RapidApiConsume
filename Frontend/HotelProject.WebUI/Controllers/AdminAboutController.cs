@@ -21,7 +21,7 @@ namespace HotelProject.WebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultBookingDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
                 return View(values);
             }
             return View();
