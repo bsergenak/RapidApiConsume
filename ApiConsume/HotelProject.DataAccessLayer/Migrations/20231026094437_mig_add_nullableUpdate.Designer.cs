@@ -4,6 +4,7 @@ using HotelProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231026094437_mig_add_nullableUpdate")]
+    partial class mig_add_nullableUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,7 +161,7 @@ namespace HotelProject.DataAccessLayer.Migrations
                     b.Property<string>("WorkDepartment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WorkLocationId")
+                    b.Property<int>("WorkLocationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -615,7 +617,9 @@ namespace HotelProject.DataAccessLayer.Migrations
                 {
                     b.HasOne("HotelProject.EntityLayer.Concrete.WorkLocation", "WorkLocation")
                         .WithMany("AppUsers")
-                        .HasForeignKey("WorkLocationId");
+                        .HasForeignKey("WorkLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("WorkLocation");
                 });
